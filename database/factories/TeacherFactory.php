@@ -18,6 +18,7 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id'=>1,
             'name'  =>$this->faker->name,
             'phone' =>'017'.rand(11111111,99999999),
             'email' =>$this->faker->email,

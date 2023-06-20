@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('exam_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name')->nullable();
             $table->tinyInteger('status')->nullable();
             $table->timestamps();

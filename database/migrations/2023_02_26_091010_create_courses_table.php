@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('categories_id')->nullable()->constrained('categories')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable()->default('images/default.jpg');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false)->nullable();
             $table->boolean('is_featured')->default(false)->nullable();
             $table->boolean('is_popular')->default(false)->nullable();
+            $table->boolean('is_copy')->default(false)->nullable();
             $table->integer('view_count')->default(0);
             $table->string('others_one')->nullable();
             $table->string('others_two')->nullable();

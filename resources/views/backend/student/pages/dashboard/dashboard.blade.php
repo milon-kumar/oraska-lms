@@ -37,14 +37,14 @@
                                             <p class="font-13 text-white-50"> {{ $user->email ?? '' }}</p>
 
                                             <ul class="mb-0 list-inline text-light">
-                                                <li class="list-inline-item me-3">
-                                                    <h5 class="mb-1">{{ $enrole->course->chapters->count() ?? 0 }}</h5>
-                                                    <p class="mb-0 font-13 text-white-50">Total Class</p>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <h5 class="mb-1">{{ $enrole->course->videos->count() ?? 0 }}</h5>
-                                                    <p class="mb-0 font-13 text-white-50">Total Video</p>
-                                                </li>
+{{--                                                <li class="list-inline-item me-3">--}}
+{{--                                                    <h5 class="mb-1">{{ $enrole->course->count() ?? 0 }}</h5>--}}
+{{--                                                    <p class="mb-0 font-13 text-white-50">Total Class</p>--}}
+{{--                                                </li>--}}
+{{--                                                <li class="list-inline-item">--}}
+{{--                                                    <h5 class="mb-1">{{ $enrole->course->videos->count() ?? 0 }}</h5>--}}
+{{--                                                    <p class="mb-0 font-13 text-white-50">Total Video</p>--}}
+{{--                                                </li>--}}
                                             </ul>
                                         </div>
                                     </div>
@@ -53,9 +53,9 @@
 
                             <div class="col-sm-4">
                                 <div class="text-center mt-sm-0 mt-3 text-sm-end">
-                                    <button type="button" class="btn btn-light">
+                                    <a href="{{ route('student.profile.edit',$user->id) }}" class="btn btn-light">
                                         <i class="mdi mdi-account-edit me-1"></i> Edit Profile
-                                    </button>
+                                    </a>
                                 </div>
                             </div> <!-- end col-->
                         </div> <!-- end row -->

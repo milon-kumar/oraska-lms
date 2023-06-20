@@ -14,21 +14,21 @@ class ChapterExam extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class);
     }
 
     public function course()
     {
-        return $this->belongsTo(Course::class,'courses_id');
+        return $this->belongsTo(Course::class);
     }
 
     public function chapter()
     {
-        return $this->belongsTo(CourseChapter::class,'course_chapters_id');
+        return $this->belongsTo(CourseChapter::class);
     }
 
     public function examTypes()
     {
-        return $this->belongsTo(ExamType::class,'exam_types_id');
+        return $this->belongsTo(ExamType::class);
     }
 }

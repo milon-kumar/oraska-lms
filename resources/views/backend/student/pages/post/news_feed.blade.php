@@ -48,9 +48,9 @@
                                     <p>Created At : {{ $post->created_at->diffForHumans() }}</p>
                                 </div>
                                 <div class="float-end" style="float: left;">
-                                    @if($post->user_id  == $post->user->id )
+                                    @if(auth()->id()  == $post->user->id )
                                         <a href="{{ route('student.post.edit',$post->id) }}">
-                                            <i class="mdi mdi-comment-edit-outline"></i>
+                                            <button class="btn btn-success btn-sm">Edit &nbsp;<i class="mdi mdi-comment-edit-outline"></i></button>
                                         </a>
                                     @endif
                                 </div>
@@ -74,9 +74,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="mt-1 mb-1">
-                                <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted ps-0"><i class="mdi mdi-heart text-danger"></i> 1.2k Likes</a>
-                                <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-comments-alt"></i> 148 Comments</a>
-                                <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-share-alt"></i> Share</a>
+                                <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-comments-alt"></i> {{ $post->comments->count() ?? 0}} Comments</a>
+                                <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-eye"></i>{{ $post->view_count ?? 0 }} View</a>
                             </div>
                         </div>
                     </div>

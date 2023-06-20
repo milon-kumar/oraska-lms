@@ -58,18 +58,57 @@
                     </div>
                     <img src="{{ $post->image ? asset($post->image) : asset('images/default.jpg') }}" class="card-img-top" alt="{{ $post->slug }}">
                     <div class="card-body">
-                        <a href="{{ route('student.post.show',$post->id) }}">
                             <h5 class="card-title">{{ $post->title ?? '' }}</h5>
-                        </a>
                         <p class="card-text">{!! $post->description !!}</p>
                     </div>
                     <div class="card-footer">
                         <div class="mt-1 mb-1">
-                            <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted ps-0"><i class="mdi mdi-heart text-danger"></i> 1.2k Likes</a>
-                            <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-comments-alt"></i> 148 Comments</a>
-                            <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-share-alt"></i> Share</a>
+                            <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-comments-alt"></i> {{ $post->comments->count() ??  0}} Comments</a>
+                            <a href="javascript: void(0);" class="btn btn-sm btn-link border border-secondary text-muted"><i class="uil uil-eye"></i>{{ $post->view_count ?? 0 }} View</a>
                         </div>
                     </div>
+                </div>
+                <div class="card border border-secondary">
+                    <div class="container bootstrap snippets bootdey">
+                        <div class="row">
+                            <div class="col-md-12 p-3">
+                                @foreach($post->comments as $comment)
+                                  <div class="border p-2 pb-2 mb-2">
+                                      {{------------=========== Start Comment =========----------------}}
+                                      <div class="d-flex">
+                                          <div class="" style="width: 35px;height: 35px;overflow: hidden;">
+                                              <img style="width: 100%;height: 100%;" src="{{ $comment->user->image ? asset($comment->user->image) : asset('images/user.webp') }}" alt="">
+                                          </div>
+                                          <div class="">
+                                              <small class="d-block">{{ $comment->user->name ?? '' }}</small>
+                                              <small class="d-block">Created at : {{ $comment->created_at->diffForHumans() ?? '' }}</small>
+                                          </div>
+
+                                      </div>
+                                      <p class="pt-2">{!! $comment->message ?? '' !!}</p>
+                                      {{------------=========== End Comment =========----------------}}
+                                        {{------------=========== Start Replay =========----------------}}
+                                          @foreach($comment->replayComments as $repay)
+                                              <div class="border p-2 pb-2 mb-2">
+                                                  <div class="d-flex">
+                                                      <div class="" style="width: 35px;height: 35px;overflow: hidden;">
+                                                          <img style="width: 100%;height: 100%;" src="{{ $repay->user->image ? asset($repay->user->image) : asset('images/user.webp') }}" alt="">
+                                                      </div>
+                                                      <div class="">
+                                                          <small class="d-block">{{ $repay->user->name ?? '' }}</small>
+                                                          <small class="d-block">Created at : {{ $repay->created_at->diffForHumans() ?? '' }}</small>
+                                                      </div>
+                                                  </div>
+                                                  <p class="pt-2">{!! $repay->message ?? '' !!}</p>
+                                              </div>
+                                          @endforeach
+                                      {{------------=========== End Replay =========----------------}}
+                                  </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

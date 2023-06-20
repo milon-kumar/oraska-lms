@@ -19,15 +19,15 @@ class VideoFactory extends Factory
     {
         $title = $this->faker->text(30);
         return [
-            'users_id'=>1,
-            'courses_id'=>rand(1,100),
-            'course_chapters_id'=>rand(1,100),
+            'user_id'=>1,
+            'course_id'=>1,
+            'course_chapter_id'=>1,
             'serial'=>rand(1,100),
-            'video_title'=>$title,
+            'title'=>$title,
             'slug'=>Str::slug($title),
-            'video_link'=>$this->faker->url(),
+            'link'=>$this->faker->url(),
             'is_free'=>rand(0,1),
-            'video_view_count'=>0,
+            'view_count'=>0,
         ];
     }
 }

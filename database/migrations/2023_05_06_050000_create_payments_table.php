@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('unique_id')->nullable();
-            $table->foreignId('users_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('method')->nullable();
             $table->string('number')->nullable();
             $table->string('transition_id')->nullable();

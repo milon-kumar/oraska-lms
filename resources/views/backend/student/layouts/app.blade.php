@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
     <meta content="Coderthemes" name="author">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @include('backend.student.includes.header_links')
 
 </head>
@@ -51,7 +52,7 @@
 <!-- END wrapper -->
 
 <!-- Right Sidebar -->
-@include('backend.admin.includes.right_sidebar')
+{{--@include('backend.admin.includes.right_sidebar')--}}
 <div class="rightbar-overlay"></div>
 <!-- /End-bar -->
 
@@ -68,6 +69,13 @@
 <!-- demo app -->
 <script src="{{asset('/')}}backend/assets/js/pages/demo.dashboard.js"></script>
 <!-- end demo js-->
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 @yield('script')
 </body>
 </html>

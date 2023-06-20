@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Enrole;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -13,8 +15,13 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        return Enrole::where('courses_id',4)->get();
         return view('backend.admin.pages.student.index',compact('students'));
+    }
+
+    public function studentOpinion()
+    {
+        return view('backend.admin.pages.student.student_opinion');
     }
 
     /**

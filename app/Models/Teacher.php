@@ -13,6 +13,6 @@ class Teacher extends Model
 
     public function couse()
     {
-        return $this->hasMany(CourseDetails::class,'teachers_id');
+        return $this->hasMany(CourseDetails::class);
     }
 }

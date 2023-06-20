@@ -43,14 +43,14 @@
                             <div class="row mb-2">
                                 <label class="col-md-3" for="">Title</label>
                                 <div class="col-md-9">
-                                    @include('backend.admin.components.form_element.input',['type'=>'text','required'=>'required','name'=>'video_title','value'=>$video->video_title ?? '',])
+                                    @include('backend.admin.components.form_element.input',['type'=>'text','required'=>'required','name'=>'title','value'=>$video->title ?? '',])
                                 </div>
                             </div>
 
                             <div class="row mb-2">
                                 <label class="col-md-3" for="">Video Link</label>
                                 <div class="col-md-9">
-                                    @include('backend.admin.components.form_element.input',['type'=>'url','required'=>'required','name'=>'video_link','value'=>$video->video_link ?? '',])
+                                    @include('backend.admin.components.form_element.input',['type'=>'url','required'=>'required','name'=>'link','value'=>$video->link ?? '',])
                                 </div>
                             </div>
 

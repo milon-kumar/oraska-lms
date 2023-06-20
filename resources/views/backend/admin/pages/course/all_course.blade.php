@@ -18,6 +18,7 @@
                                         <th>#SL</th>
                                         <th>Category</th>
                                         <th>Title</th>
+                                        <th>Copy Status</th>
                                         <th>Status</th>
                                         <th>Change Status</th>
                                     </tr>
@@ -32,6 +33,10 @@
                                                 <img src="{{asset($course->image)}}" alt="table-user" class="me-2 rounded-circle">
                                                 <a href="javascript:void(0);" class="text-body fw-semibold">{{ optional($course)->title }}</a>
                                             </td>
+                                            <td>
+                                                @if($course->is_copy == true)
+                                                    <span class="badge badge-danger-lighten text-uppercase">Copy Course</span>                                            </td>
+                                                @endif
                                             <td>
                                                @include('backend.admin.components.all_status')
                                             </td>

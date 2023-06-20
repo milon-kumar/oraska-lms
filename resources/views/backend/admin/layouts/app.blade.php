@@ -13,7 +13,7 @@
     @include('backend.admin.includes.header_links')
 </head>
 
-<body class="loading"
+<body class="loading show sidebar-enable"
       data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
 <!-- Begin page -->
 <div class="wrapper">
@@ -31,6 +31,7 @@
             <!-- end Topbar -->
 
             <!-- Start Content-->
+            <div class="my-2"></div>
             @yield('content')
             <!-- container -->
         </div>
@@ -49,7 +50,7 @@
 <!-- END wrapper -->
 
 <!-- Right Sidebar -->
-@include('backend.admin.includes.right_sidebar')
+{{--@include('backend.admin.includes.right_sidebar')--}}
 <div class="rightbar-overlay"></div>
 <!-- /End-bar -->
 @include('backend.admin.includes.script')

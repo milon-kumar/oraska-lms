@@ -20,13 +20,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('student.dashboard') }}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-circle me-1"></i>
                     <span>My Account</span>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('student.setting.account') }}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-edit me-1"></i>
                     <span>Settings</span>
                 </a>

@@ -19,8 +19,9 @@ class CourseFactory extends Factory
     {
         $title =  $this->faker->text(60);
         return [
+            'user_id'=>1,
+            'category_id'=>1,
             'title'=>$title,
-            'categories_id'=>rand(1,5),
             'slug'=>Str::slug($title),
             'image'=>'images/default.jpg',
             'regular_course_fee'=>200000,

@@ -21,21 +21,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         $this->call([
             UserSeeder::class,
-            SettingSeeder::class,
+            RolePermissionSeeder::class,
         ]);
-        Teacher::factory(10)->create();
-        Category::factory(5)->create();
-        Course::factory(5)->create();
-//        CourseChapter::factory(5)->create();
-//        Video::factory(5)->create();
+        Teacher::factory(5)->create();
+        Category::factory(1)->create();
+        Course::factory(1)->create();
+        CourseChapter::factory(1)->create();
+        Video::factory(1)->create();
     }
 }

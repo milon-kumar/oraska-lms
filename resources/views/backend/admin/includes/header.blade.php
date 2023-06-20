@@ -1,7 +1,7 @@
-<div class="navbar-custom">
+<div class="navbar-custom bg-dark navbar-dark" style="border-bottom: 4px solid var(--bs-secondary)">
     <ul class="list-unstyled topbar-menu float-end mb-0">
         <li class="dropdown notification-list d-none d-sm-inline-block">
-            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+            <a class="nav-link dropdown-toggle arrow-none text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-view-apps noti-icon"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg p-0" style="">
@@ -74,13 +74,13 @@
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('admin.setting.profile') }}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-circle me-1"></i>
                     <span>My Account</span>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('admin.setting.index') }}" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-edit me-1"></i>
                     <span>Settings</span>
                 </a>
@@ -94,7 +94,7 @@
         </li>
 
     </ul>
-    <button class="button-menu-mobile open-left">
+    <button class="button-menu-mobile open-left text-white">
         <i class="mdi mdi-menu"></i>
     </button>
 

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $table='users';
     /**
@@ -47,36 +48,36 @@ class User extends Authenticatable
 
     public function chourseChapters()
     {
-        return $this->hasMany(CourseChapter::class,'users_id');
+        return $this->hasMany(CourseChapter::class);
     }
 
     public function videos()
     {
-        return $this->hasMany(Video::class,'users_id');
+        return $this->hasMany(Video::class);
     }
 
     public function examTypes()
     {
-        return $this->hasMany(ExamType::class,'users_id');
+        return $this->hasMany(ExamType::class);
     }
 
     public function exams()
     {
-        return $this->hasMany(ChapterExam::class,'users_id');
+        return $this->hasMany(ChapterExam::class);
     }
 
     public function enroles()
     {
-        return $this->belongsTo(Enrole::class,'users_id');
+        return $this->belongsTo(Enrole::class);
     }
 
     public function payments()
     {
-        return $this->belongsTo(Payment::class,'users_id');
+        return $this->belongsTo(Payment::class);
     }
 
     public function allEnroles()
     {
-        return $this->hasMany(Enrole::class,'users_id');
+        return $this->hasMany(Enrole::class);
     }
 }

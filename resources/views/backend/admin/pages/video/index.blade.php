@@ -45,10 +45,10 @@
                                         <tbody>
                                         @foreach($videos as $key => $video)
                                             <tr>
-                                                <td>{{ optional($video)->video_title }}</td>
+                                                <td>{{ optional($video)->title }}</td>
                                                 <td>{{ optional($video)->serial }}</td>
                                                 <td>
-                                                    <a href="{{ optional($video)->video_link }}">{{ Str::limit(optional($video)->video_link,30) }}</a>
+                                                    <a href="{{ optional($video)->link }}">{{ Str::limit(optional($video)->video_link,30) }}</a>
                                                 </td>
                                                 <td>{{ $video->duration ?? '' }}</td>
                                                 <td>

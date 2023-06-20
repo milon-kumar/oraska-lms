@@ -33,12 +33,14 @@
                     <span> Profile </span>
                 </a>
             </li>
-            <li class="side-nav-item">
-                <a href="{{ route('student.post.index') }}" class="side-nav-link">
-                    <i class="dripicons-blog"></i>
-                    <span> Community Post </span>
-                </a>
-            </li>
+            @if(get_setting('community_post'))
+                <li class="side-nav-item">
+                    <a href="{{ route('student.post.index') }}" class="side-nav-link">
+                        <i class="dripicons-blog"></i>
+                        <span> Community Post </span>
+                    </a>
+                </li>
+            @endif
             <li class="side-nav-item">
                 <a href="{{ route('student.courses') }}" class="side-nav-link">
                     <i class="dripicons-checklist"></i>
@@ -46,7 +48,7 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="{{ route('student.dashboard') }}" class="side-nav-link">
+                <a href="{{ route('student.buy-course') }}" class="side-nav-link">
                     <i class="dripicons-shopping-bag"></i>
                     <span> Buy New Courses </span>
                 </a>
@@ -58,7 +60,7 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="{{ route('student.dashboard') }}" class="side-nav-link">
+                <a href="{{ route('student.chapter') }}" class="side-nav-link bg-danger text-white">
                     <i class="dripicons-media-play"></i>
                     <span> View all Class Videos </span>
                 </a>
@@ -72,47 +74,44 @@
                 </a>
                 <div class="collapse" id="sidebarEcommerce">
                     <ul class="side-nav-second-level">
-                        <li>
-                            <a href="apps-ecommerce-products.html">Lecture notes </a>
-                        </li>
-                        <li>
-                            <a href="apps-ecommerce-products.html">CQ Questions</a>
-                        </li>
-                        <li>
-                            <a href="apps-ecommerce-products.html">CQ Solves</a>
-                        </li>
-                        <li>
-                            <a href="apps-ecommerce-products.html">PDF Questions</a>
-                        </li>
-                        <li>
-                            <a href="apps-ecommerce-products.html">PDF Solves</a>
-                        </li>
-                        <li>
-                            <a href="apps-ecommerce-products.html">Essentials</a>
-                        </li>
+                        @if(get_setting('upload_pdf_lecture_notes'))
+                            <li>
+                                <a href="{{ route('student.pdf','lecture-notes') }}">Lecture notes </a>
+                            </li>
+                        @endif
+                        @if(get_setting('upload_cq_questions'))
+                            <li>
+                                <a href="{{ route('student.pdf','cq-questions') }}">CQ Questions</a>
+                            </li>
+                        @endif
+                        @if(get_setting('upload_cq_questions_solve'))
+                            <li>
+                                <a href="{{ route('student.pdf','cq-questions-solve') }}">CQ Questions Solves</a>
+                            </li>
+                        @endif
+                        @if(get_setting('upload_pdf_questions'))
+                            <li>
+                                <a href="{{ route('student.pdf','pdf-questions') }}">PDF Questions</a>
+                            </li>
+                        @endif
+                        @if(get_setting('upload_pdf_solve'))
+                            <li>
+                                <a href="{{ route('student.pdf','pdf-questions-solve') }}">PDF Solves</a>
+                            </li>
+                        @endif
+                        @if(get_setting('upload_omr_form_essentials'))
+                            <li>
+                                <a href="{{ route('student.pdf','omr-form-essentials') }}">Essentials</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </li>
             <li class="side-nav-item">
-                <a href="{{ route('student.dashboard') }}" class="side-nav-link">
+                <a href="{{ route('student.complain.index') }}" class="side-nav-link">
                     <i class="dripicons-information"></i>
                     <span> Complain Box </span>
                 </a>
-            </li>
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#settings" aria-expanded="false"
-                   aria-controls="sidebarEcommerce" class="side-nav-link">
-                    <i class="dripicons-gear"></i>
-                    <span> Settings </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="settings">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="apps-ecommerce-products.html">Account</a>
-                        </li>
-                    </ul>
-                </div>
             </li>
         </ul>
 

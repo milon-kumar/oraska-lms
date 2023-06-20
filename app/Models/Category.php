@@ -13,11 +13,11 @@ class Category extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class,'categories_id');
+        return $this->hasMany(Course::class);
     }
 
     public function publishedCourses()
     {
-        return $this->hasMany(Course::class,'categories_id')->where('status','published');
+        return $this->hasMany(Course::class)->where('status','published');
     }
 }

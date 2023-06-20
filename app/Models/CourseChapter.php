@@ -14,21 +14,21 @@ class CourseChapter extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class);
     }
 
     public function course()
     {
-        return $this->belongsTo(Course::class,'courses_id');
+        return $this->belongsTo(Course::class);
     }
 
     public function videos()
     {
-        return $this->hasMany(Video::class,'course_chapters_id');
+        return $this->hasMany(Video::class);
     }
 
     public function exams()
     {
-        return $this->hasMany(ChapterExam::class,'course_chapters_id');
+        return $this->hasMany(ChapterExam::class);
     }
 }

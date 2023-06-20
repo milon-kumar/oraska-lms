@@ -14,17 +14,40 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert([
-            'name' => 'Example Admin',
+        //Create Super Admin
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'exampel@superadmin.com',
+            'password' => Hash::make('exampel@superadmin.com'),
+            'type' => 'super_admin',
+            'is_delete'=>false,
+        ]);
+
+        //Create Admin
+        User::create([
+            'name' => 'Admin',
             'email' => 'example@admin.com',
             'password' => Hash::make('example@admin.com'),
-            'type' => 'admin'
+            'type' => 'admin',
+            'is_delete'=>true,
         ]);
+
+        //Create Teacher
         User::create([
-            'name' => 'Example Student',
-            'email' => 'example@student.com',
-            'password' => Hash::make('example@student.com'),
-            'type' => 'student',
+            'name' => 'Teacher',
+            'email' => 'example@teacher.com',
+            'password' => Hash::make('example@teacher.com'),
+            'type' => 'admin',
+            'is_delete'=>true,
+        ]);
+
+        //Create Teacher
+        User::create([
+            'name' => 'Official',
+            'email' => 'example@official.com',
+            'password' => Hash::make('example@official.com'),
+            'type' => 'admin',
+            'is_delete'=>true,
         ]);
     }
 }

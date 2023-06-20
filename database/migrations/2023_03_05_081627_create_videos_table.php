@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('course_chapters_id')->nullable()->constrained('course_chapters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('video_title')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_chapter_id')->nullable()->constrained('course_chapters')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->text('video_link')->nullable();
+            $table->text('link')->nullable();
             $table->integer('serial')->nullable()->default(0);
             $table->boolean('is_free')->default(true)->comment('True Minnes Is Paied Course Chapter . Is not free')->nullable();
             $table->boolean('is_status')->default(false)->nullable();
@@ -38,7 +38,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('videos');
     }

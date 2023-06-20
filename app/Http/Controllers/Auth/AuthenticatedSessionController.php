@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
 
 
         //return redirect()->intended(RouteServiceProvider::HOME);
-        if (auth()->check() && auth()->user()->type == 'admin'){
+        if (auth()->check() && auth()->user()->type == 'super_admin' || auth()->user()->type == 'admin'){
             toast('Login Successfully... :)','success');
             return  redirect()->route('admin.dashboard');
         }elseif (auth()->check() && auth()->user()->type == 'student'){
@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        toast('Logout Successfully... :)');
+        toast('Logout Successfully... :)','success');
         return redirect('/');
     }
 }

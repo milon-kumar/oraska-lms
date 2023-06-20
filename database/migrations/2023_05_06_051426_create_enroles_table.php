@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('enroles', function (Blueprint $table) {
             $table->id();
             $table->string('unique_id')->nullable();
-            $table->foreignId('users_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('payments_id')->nullable()->constrained('payments')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->enum('status',['published','unpublished','pending','success','failure','cancel','active','inactive','approve','decline','delete'])->default('published');
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('payment_id')->nullable()->constrained('payments')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->enum('status',['published','unpublished','pending','success','failure','cancel','active','inactive','approve','decline','delete'])->default('pending');
             $table->timestamps();
         });
     }

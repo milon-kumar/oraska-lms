@@ -19,8 +19,8 @@ class CourseChapterFactory extends Factory
     {
         $name = $this->faker->text(15);
         return [
-            'users_id'=>1,
-            'courses_id'=>rand(1,250),
+            'user_id'=>1,
+            'course_id'=>1,
             'name'=>$name,
             'slug'=>Str::slug($name),
             'image'=>'images/default.jpg',

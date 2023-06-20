@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->type == 'admin'){
+        if (Auth::check() && Auth::user()->type == 'super_admin' || Auth::user()->type == 'admin'){
             return $next($request);
         }else{
             toast('Access Denied','error');

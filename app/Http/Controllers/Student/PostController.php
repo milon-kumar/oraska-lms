@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
@@ -17,7 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['user'])->latest()->paginate(40);
+
+
+        $posts = Post::with(['user','comments', 'comments.replayComments'])->latest()->paginate(40);
         return view('backend.student.pages.post.news_feed',compact('posts'));
     }
 
@@ -44,6 +47,7 @@ class PostController extends Controller
 
         Post::create([
            'user_id'=>Auth::id(),
+           'course_id'=>stdCourseId(),
            'title'=>$request->input('title'),
            'slug'=>Str::slug($request->integer('title')),
            'description'=>$request->input('description'),
@@ -58,7 +62,12 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::with(['user'])->findOrFail($id);
+        $post = Post::with(['user','comments','comments.user', 'comments.replayComments', 'comments.replayComments.user'])->findOrFail($id);
+        $viewKey = 'post_'.$post->id;
+        if (!Session::has($viewKey)){
+            $post->increment('view_count');
+        }
+        Session::put($viewKey,1);
         return view('backend.student.pages.post.show',compact('post'));
     }
 

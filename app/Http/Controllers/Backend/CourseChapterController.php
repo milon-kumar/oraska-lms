@@ -31,10 +31,8 @@ class CourseChapterController extends Controller
     public function courseByChapter($id)
     {
         Session::forget('chapter_id');
-        $chapters =  CourseChapter::with('videos')->where('courses_id',Session::get('course_id'))->orderBy('created_at','DESC')->get();
-        return view('backend.admin.pages.chapter.index',[
-            'chapters'=>$chapters,
-        ]);
+        $chapters =  CourseChapter::with('videos')->where('course_id',courseId())->orderBy('created_at','DESC')->get();
+        return view('backend.admin.pages.chapter.index',compact('chapters'));
     }
 
     /**
@@ -44,8 +42,8 @@ class CourseChapterController extends Controller
     {
         foreach ($request->name as $key => $value){
             $saveData = [
-                'users_id'=>auth()->id(),
-                'courses_id'=>Session::get('course_id'),
+                'user_id'=>auth()->id(),
+                'course_id'=>courseId(),
                 'name'=>$request->name[$key],
                 'slug'=>Str::slug($request->name[$key]),
                 'serial'=>$request->serial[$key],
@@ -85,8 +83,8 @@ class CourseChapterController extends Controller
         $chapter = CourseChapter::with('course')->findOrFail($id);
 
         $chapter->update([
-            'users_id'=>auth()->id(),
-            'courses_id'=>Session::get('course_id'),
+            'user_id'=>auth()->id(),
+            'course_id'=>courseId(),
             'name'=>$request->input('name'),
             'slug'=>Str::slug($request->input('name')),
             'serial'=>$request->input('serial'),

@@ -12,7 +12,7 @@
     <section>
         <div
             class="text-center mb-2"
-            style="padding: 10px 0;background: linear-gradient(rgba(0,15,52,0.95),rgba(69,0,0,0.94)), url({{ asset( $course->image) }});background-size: cover;backdrop-filter: blur(10)"
+            style="padding: 10px 0;background: linear-gradient(rgba(0,15,52,0.95),rgba(69,0,0,0.94)), url({{ asset( $course->image ?? defaultImage()) }});background-size: cover;backdrop-filter: blur(10)"
         >
             <h1 class="text-uppercase fw-bold text-white">Athena Science Academy</h1>
             <h4 class="text-white fw-semibold">{{ $course->title ?? '' }}</h4>
@@ -35,11 +35,20 @@
                             <table class="table table-striped">
                                 <tr>
                                     <th>কোর্সটি করছেনঃ </th>
-                                    <td>{{ $course->courseDetails->total_course_students ?? 0 }} জন</td>
+                                    {{--                                    <td>{{ ($course->courseDetails->total_course_students) + (\App\Models\Enrole::count() ?? 0 )?? 0 }} জন</td>--}}
+                                    <td>{{ \App\Models\Enrole::count() + optional($course?->courseDetails)->total_course_students?? 0  }} জন</td>
                                 </tr>
                                 <tr>
-                                    <th>ক্লাস ভিভিও সংখ্যাঃ </th>
+                                    <th>রেকর্ডেড ক্লাস ভিভিও সংখ্যাঃ</th>
                                     <td>{{ $course->courseDetails->total_course_videos ?? 0 }} টি</td>
+                                </tr>
+                                <tr>
+                                    <th>লাইভ ক্লাস সংখ্যাঃ</th>
+                                    <td>{{ $course->courseDetails->live_classes ?? 0 }} টি</td>
+                                </tr>
+                                <tr>
+                                    <th>লাইভ ক্লাস এর সময়ঃ</th>
+                                    <td>{{ $course->courseDetails->live_class_time ?? 0 }} টি</td>
                                 </tr>
                                 <tr>
                                     <th>মোট ক্লাস ঘণ্টাঃ </th>
@@ -59,11 +68,11 @@
                                 </tr>
                                 <tr>
                                     <th>ক্লাস কি ওয়েবঅ্যাপে সাজানো থাকবেঃ </th>
-                                    <td> {{ $course->courseDetails?->class_recorded == 1 ? 'হ্যাঁ' : 'না' }}</td>
+                                    <td> {{ optional($course->courseDetails)->class_recorded == 1 ? 'হ্যাঁ' : 'না' ?? '' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>ফেসবুক লাইভ ক্লাস কি হবেঃ </th>
-                                    <td>{{ $course->courseDetails?->class_facebook_live == 1 ? 'হ্যাঁ' : 'না' }}</td>
+                                    <th>লাইভ ক্লাস কিভাবে হবেঃ </th>
+                                    <td>{{ $course->courseDetails->live_class_method }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -76,13 +85,17 @@
                             <a target="_blank" href="{{ $course->courseDetails?->course_buy_video ?? 'javascript:void(0)'}}">{{ $course->courseDetails?->course_buy_video ?? ''}}</a>
                         </div>
                     </div>
+                    @foreach(json_decode($course->courseDetails->teachers) as $teacher_id)
+                        @php
+                            $teacher = \App\Models\Teacher::findOrFail($teacher_id)
+                        @endphp
                     <div class="card border border-secondary mb-2">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="user-image">
                                         <img
-                                            src="{{ asset($course->courseDetails->teacher->image ?? config('filesystems.noimage')) }}"
+                                            src="{{ $teacher->image ? asset($teacher->image) : defaultImage() }}"
                                             alt="{{ $course->courseDetails->teacher->name ?? 'No Image' }}">
                                     </div>
                                 </div>
@@ -90,10 +103,10 @@
                                     <h5> Course Teacher</h5>
                                     <table>
                                         <tr>
-                                            <th class="font-22 fw-semibold">{{ $course->courseDetails->teacher->name ?? '' }}</th>
+                                            <th class="font-22 fw-semibold">{{ $teacher->name ?? '' }}</th>
                                         </tr>
                                         <tr>
-                                            <td>{{ $course->courseDetails->teacher->description ?? ''  }}</td>
+                                            <td>{{ $teacher->description ?? ''  }}</td>
                                         </tr>
                                         <tr>
                                             <th>
@@ -101,7 +114,7 @@
                                                     <a
                                                         class="d-flex justify-content-center align-items-center"
                                                         style="width: 40px;height: 40px;border-radius: 50px;background: radial-gradient(#0165E1,#17A9FD);margin-right: 20px;color: white;"
-                                                        href="{{ $course->courseDetails->teacher->fb_page ?? ''}}"
+                                                        href="{{ $teacher->fb_page ?? ''}}"
                                                         target="_blank"
                                                     >
                                                         <i class="mdi mdi-facebook mdi-24px"></i>
@@ -109,7 +122,7 @@
                                                     <a
                                                         class="d-flex justify-content-center align-items-center"
                                                         style="width: 40px;height: 40px;border-radius: 50px;background: radial-gradient(#FF0000,#ff0000);color: white;"
-                                                        href="{{ $course->courseDetails->teacher->youtube_chanel ?? ''}}"
+                                                        href="{{ $teacher->youtube_chanel ?? ''}}"
                                                         target="_blank"
                                                     >
                                                         <i class="mdi mdi-youtube mdi-24px"></i>
@@ -123,12 +136,13 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <div class="col-md-4">
                     <div class="card border border-secondary mb-2">
                         <div class="card-img-top">
                             <div class="instraction-video">
-                                {!! $course->courseDetails->course_introduction_video ?? '' !!}
+                                <iframe style="width: 100%;height: auto; min-height: 250px;" src="https://www.youtube.com/embed/{!! $course->courseDetails->course_introduction_video ?? '' !!}"></iframe>
                             </div>
                         </div>
                         <div class="card-body">
@@ -139,6 +153,7 @@
                         </div>
                         <div class="card-footer text-center">
                             <a href="{{ route('frontend.enrole',$course->slug ?? '') }}" class="btn btn-success">কোর্সটিতে ভর্তি হও</a>
+
                             <input type="hidden" value="{{ url('/details/'.$course->slug) }}" id="copyLink">
                             <a href="javascript:void(0);" onclick="copyLink()" class="btn btn-success">
                                 <i class="mdi mdi-share"></i>

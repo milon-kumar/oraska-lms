@@ -6,11 +6,13 @@
 @section('content')
     <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner" role="listbox">
-            @foreach(\App\Models\Category::all() as $key=> $slider)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="background: url({{ asset('frontend/img/slider5.jpg') }});height: 350px;
+            @foreach(\App\Models\Slider::orderBy('serial','ASC')->get() as $key=> $slider)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="background: url({{ asset($slider->image) ?? defaultImage() }});height: 600px;
                     width: 100vw;
                     background-repeat: no-repeat;
-                    background-size: cover;">
+                    background-size: cover;
+                    background-position: center;
+                    ">
 {{--                    <img src="{{ asset('frontend/img/slider5.jpg') }}" alt="" class="d-block img-fluid">--}}
                     <div class="carousel-caption d-none d-md-block">
                         <h3 class="text-white">First slide label</h3>
@@ -66,16 +68,16 @@
                         <div class="col-md-6">
                             <div class="card shadow rounded-0">
                                 <div class="card-body">
-                                    <iframe style="object-fit: contain;width: 100%;" height="315" src="https://www.youtube.com/embed/Gzk8Qrn6rAw?controls=0&amp;start=420" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    <iframe style="object-fit: contain;width: 100%;" height="315" src="https://www.youtube.com/embed/{{ get_setting('our_youtube_message') }}?controls=0&amp;start=420" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card shadow rounded-0">
                                 <div class="card-body">
-                                    <h4 class="text-dark">About Headding</h4>
-                                    <div class="" style="overflow: scroll;height: 315px;text-align: justify;">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem cupiditate est excepturi fuga ipsum magni nesciunt ratione, reprehenderit vero. Autem consequuntur debitis et eveniet explicabo facilis incidunt laborum, quaerat vitae? Aliquam aliquid autem deleniti dicta esse ex excepturi illo in incidunt iste, iusto magnam maiores modi molestiae omnis praesentium quia ratione repellat, sed sit? Alias aliquam blanditiis dolorem doloribus, ducimus harum libero minus nisi optio, rerum sint vel, voluptate voluptatem. Enim hic quia voluptatem. Asperiores dignissimos fugiat in neque qui reiciendis rem. Accusantium animi atque aut blanditiis debitis deleniti dicta dolore dolorum et excepturi hic illum ipsa iusto labore maxime molestiae mollitia non nostrum odio officia pariatur quia quidem quisquam quos recusandae reiciendis sint, tempora tenetur vel voluptatem? Aliquam beatae consequatur delectus fugiat maxime totam veritatis? Architecto asperiores atque doloremque dolorum expedita fugit illo inventore iste, labore magni neque odio perspiciatis ratione sed vel veniam veritatis voluptatum! Dicta ipsa nihil, obcaecati omnis quibusdam vel vitae! Dolorem et explicabo molestiae non rerum sint tempore voluptatibus. A culpa excepturi numquam optio pariatur sed tenetur. Ab animi at corporis delectus deleniti deserunt dignissimos dolore dolorum earum eius harum in iusto laborum libero nemo non, nulla numquam quasi qui quibusdam ratione reiciendis repellendus sunt ullam veniam voluptate voluptatem voluptatum. Cumque ducimus ex, numquam praesentium quisquam saepe veniam veritatis vero! Accusamus autem delectus dolorem, eius, eos est et eveniet fuga itaque laudantium natus quaerat quidem rerum! Assumenda atque beatae doloremque, ea est ipsum laboriosam nostrum perspiciatis quo saepe! Debitis deserunt dolores est et facere id impedit iste itaque iusto laudantium libero molestiae, molestias mollitia natus perferendis quaerat quibusdam quidem quos ratione repudiandae rerum, suscipit ullam. Adipisci animi excepturi ipsa ipsam itaque ratione similique! Ab ad cupiditate dolorem eum ipsa, iure maxime praesentium ratione reiciendis vero. Atque beatae, doloremque eius eligendi eos, eveniet fuga fugiat fugit harum in ipsum iure laborum libero minus placeat quam, quisquam repellat reprehenderit suscipit tenetur ut veritatis voluptates voluptatum? Alias consectetur consequuntur culpa deserunt dignissimos doloremque dolorum ducimus earum enim esse exercitationem harum illo iusto laboriosam libero, nam odit perspiciatis provident ratione rerum sapiente sed tempore tenetur ullam unde velit vero. Aliquid blanditiis dolorem laborum magnam nam praesentium provident quis sed suscipit. Consequuntur ea enim fugiat ipsa modi ratione sit. Aspernatur corporis culpa cupiditate ducimus eligendi facilis ipsa ipsum odit perspiciatis possimus quasi, saepe tempore velit! Accusamus aliquam corporis debitis delectus dolorem doloremque doloribus et fuga necessitatibus nihil, non quos veritatis. Aliquam amet asperiores commodi cumque deserunt doloremque et minima nam nemo officia recusandae reiciendis, saepe sed tempore ullam ut vel, vero voluptates. Ad consequuntur debitis eligendi ipsam labore nemo quam soluta? Aliquid dolores eos, est obcaecati odit recusandae. A accusantium alias aperiam architecto atque dignissimos distinctio dolor, doloribus enim esse est facere, fuga labore laborum mollitia neque nisi pariatur perspiciatis quam quas quibusdam reiciendis rerum saepe sapiente sed sequi vitae! Ab corporis illo nihil, qui tempora ullam. Animi architecto aspernatur atque consectetur fugit impedit laboriosam, laborum laudantium nam, nemo officia perspiciatis quibusdam quisquam sequi unde vero voluptatem? Quod, ut.</p>
+{{--                                    <h4 class="text-dark">About Heading</h4>--}}
+                                    <div class="" style="height: 315px;text-align: justify;">
+                                        <p class="fw-bolder text-dark" style="font-size: 18px;">{!! get_setting('our_home_description') !!}</p>
                                     </div>
                                 </div>
                             </div>

@@ -11,7 +11,7 @@ class EnrolmentController extends Controller
 {
     public function enrole()
     {
-        $enrols = Enrole::with(['user','payment','course'])->get();
+        $enrols = Enrole::with(['user','payment','course'])->where('status','pending')->get();
         return view('backend.admin.pages.enrole.index',compact('enrols'));
     }
 

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('course_chapters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->default('images/default.jpg')->nullable();

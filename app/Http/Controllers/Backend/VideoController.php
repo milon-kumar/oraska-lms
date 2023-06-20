@@ -21,11 +21,12 @@ class VideoController extends Controller
 
     public function videoIndex($id)
     {
-        $videos = Video::where('course_chapters_id',$id)->latest()->get();
+        $videos = Video::where('course_chapter_id',$id)->latest()->get();
+
         return view('backend.admin.pages.video.index',[
             'videos'=>$videos,
             'chapter_id'=>$id,
-            'course_id'=>Session::get('course_id')
+            'course_id'=>courseId(),
         ]);
     }
 
@@ -45,14 +46,14 @@ class VideoController extends Controller
 
         foreach ($request->title as $key => $value){
             $saveData = [
-                'users_id'=>auth()->id(),
-                'courses_id'=>Session::get('course_id'),
-                'course_chapters_id'=>$request->input('chapter_id'),
+                'user_id'=>auth()->id(),
+                'course_id'=>courseId(),
+                'course_chapter_id'=>$request->input('chapter_id'),
                 'serial'=>$request->serial[$key],
                 'duration'=>$request->duration[$key],
-                'video_title'=>$request->title[$key],
+                'title'=>$request->title[$key],
                 'slug'=>Str::slug($request->title[$key]),
-                'video_link'=>$request->link[$key],
+                'link'=>$request->link[$key],
                 'is_free'=>filled($request->is_free[$key] ?? null)
             ];
             DB::table('videos')->insert($saveData);
@@ -84,20 +85,20 @@ class VideoController extends Controller
     public function update(Request $request, Video $video)
     {
         $video->update([
-            'users_id'=>auth()->id(),
-            'courses_id'=>Session::get('course_id'),
-            'course_chapters_id'=>$video->course_chapters_id,
+            'user_id'=>auth()->id(),
+            'course_id'=>courseId(),
+            'course_chapter_id'=>$video->course_chapter_id,
             'serial'=>$request->input('serial'),
             'duration'=>$request->input('duration'),
-            'video_title'=>$request->input('video_title'),
+            'title'=>$request->input('title'),
             'slug'=>Str::slug($request->input('video_title')),
-            'video_link'=>$request->input('video_link'),
+            'link'=>$request->input('link'),
             'is_free'=>filled($request->input('is_free') ?? null)
         ]);
         toast('Video Data Updated.......:)','success');
 
 
-        return redirect()->route('admin.video-index',$video->course_chapters_id);
+        return redirect()->route('admin.video-index',$video->course_chapter_id);
     }
 
     /**

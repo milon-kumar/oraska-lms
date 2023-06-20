@@ -22,6 +22,7 @@
 <link href="{{asset('/')}}backend/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
 <link rel="stylesheet" href="{{asset('backend/assets/js/lib/dropify.css')}}">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+@yield('style')
 <style>
     .form-control{
         border: 1px solid #9f9f9f;

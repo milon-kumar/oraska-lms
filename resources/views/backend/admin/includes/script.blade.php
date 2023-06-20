@@ -25,13 +25,53 @@
 <script src="{{ asset('backend/assets/js/lib/dropify.js') }}"></script>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @yield('script')
 <script>
+
+    //Website Context Menu
+    @if(get_setting('website_context_menu'))
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+    @endif
+
+
+
+    //Setup Ajax Headers
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    //Dropify Image Viewer
     $('.dropify').dropify();
+
+    //Set Course Id From Admin Course
+    function setId(id) {
+        $.post('{{ route('set-course-id') }}' , {course_id:id} , function (response) {
+            $.NotificationApp.send("Success","Course Selected","top-right","green","Icon")
+            console.log(response);
+        });
+
+    }
+
+    //Show Delete Everyting Swal
+    function deleteData(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        })
+    }
 </script>

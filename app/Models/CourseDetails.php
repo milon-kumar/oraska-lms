@@ -13,11 +13,11 @@ class CourseDetails extends Model
 
     public function course()
     {
-        return $this->hasOne(Course::class,'courses_id');
+        return $this->hasOne(Course::class);
     }
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class,'teachers_id');
+        return $this->belongsTo(Teacher::class);
     }
 }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('chapter_exams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('course_chapters_id')->constrained('course_chapters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('exam_types_id')->constrained('exam_types')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_chapter_id')->constrained('course_chapters')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('exam_type_id')->constrained('exam_types')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('title')->nullable();
             $table->dateTime('time')->nullable();
             $table->string('exam_link')->nullable();

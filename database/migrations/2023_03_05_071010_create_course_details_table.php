@@ -13,22 +13,27 @@ return new class extends Migration
     {
         Schema::create('course_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('courses_id')->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('teachers_id')->constrained('teachers')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('course_id')->nullable()->constrained('courses')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('teacher_id')->nullable()->constrained('teachers')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('image')->nullable()->default('images/default.jpg');
             $table->integer('total_course_students')->nullable()->default(0);
-            $table->integer('total_course_videos')->nullable()->default(0);
-            $table->integer('total_class_hower')->nullable()->default(0);
+            $table->integer('recorded_class_video')->nullable()->default(0);
+            $table->integer('live_classes')->nullable();
+            $table->string('live_class_time')->nullable();
+            $table->integer('total_class_hours')->nullable()->default(0);
             $table->integer('mcq_exams')->nullable()->default(0);
             $table->integer('weekly_exams')->nullable()->default(0);
-            $table->integer('peper_final_exams')->nullable()->default(0);
+            $table->integer('paper_final_exams')->nullable()->default(0);
             $table->boolean('class_recorded')->default(true)->nullable();
-            $table->boolean('class_facebook_live')->default(true)->nullable();
+            $table->string('live_class_method')->nullable();
             $table->text('course_buy_video')->nullable();
             $table->text('course_description')->nullable();
+            $table->text('teachers')->nullable();
+            $table->string('fb_private_discussion_group')->nullable();
             $table->text('course_introduction_video')->nullable();
-            $table->integer('enrollment_validity')->nullable();
+            $table->date('enrollment_validity')->nullable();
+            $table->integer('video_view_permit')->nullable()->default(0);
             $table->timestamps();
         });
     }

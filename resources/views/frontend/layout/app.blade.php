@@ -10,6 +10,7 @@
     @yield('frontcss')
 </head>
 <body class="loading">
+@include('sweetalert::alert')
 @include('frontend.includes.header')
 
 @yield('content')
@@ -18,10 +19,5 @@
 @include('backend.admin.includes.script')
 
 @yield('frontjs')
-<script>
-    document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-    });
-</script>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\From;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,8 +14,9 @@ class DashboardController extends Controller
     public function dashboard()
     {
         Session::forget('course_id');
-        $courses = Course::with(['category:id,name','videos','chapters'])->latest()->orderBy('id','DESC')->where('status','published')->get();
-        return view('backend.admin.pages.dashboard.dashboard',compact('courses'));
+        //$courses = Course::with(['category:id,name','videos','chapters'])->latest()->orderBy('id','DESC')->get();
+        //$sliders = Slider::orderBy('serial','ASC')->get(['id','image','link','serial','is_read','is_buy']);
+        return view('backend.admin.pages.dashboard.dashboard');
     }
 
     public function formSubmit(Request $request)
@@ -45,5 +47,14 @@ class DashboardController extends Controller
                 'message'=>'Course Id Set success'
             ],200);
         }
+    }
+
+    public function ourTalk()
+    {
+        if (invalidPermission('Our_Talk')){
+            return redirect()->back();
+        }
+        $title = 'About Message';
+        return view('backend.admin.pages.about.index',compact('title'));
     }
 }

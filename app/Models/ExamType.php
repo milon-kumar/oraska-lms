@@ -13,11 +13,11 @@ class ExamType extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class);
     }
 
     public function exams()
     {
-        return $this->hasMany(ChapterExam::class,'exam_types_id');
+        return $this->hasMany(ChapterExam::class);
     }
 }

@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('type',['basic','admin','user','student','author','professional','subscriber'])->default('basic');
+            $table->enum('type',['super_admin','admin','teacher','official','student','user','author','professional','subscriber'])->nullable()->default('user');
             $table->string('ip_address')->nullable();
             $table->string('name')->nullable();
             $table->string('first_name')->nullable();
@@ -33,6 +33,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('image')->default('images/user.webp')->nullable();
             $table->longText('about')->nullable();
+            $table->boolean('is_delete')->default(true);
             $table->enum('status',['published','unpublished','pending','success','failure','cancel','active','inactive','approve','decline','delete'])->default('published');
             $table->rememberToken();
             $table->timestamps();

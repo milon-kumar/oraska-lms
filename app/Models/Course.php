@@ -13,26 +13,37 @@ class Course extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class,'categories_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function courseDetails()
     {
-        return $this->hasOne(CourseDetails::class,'courses_id');
+        return $this->hasOne(CourseDetails::class);
     }
 
     public function chapters()
     {
-        return $this->hasMany(CourseChapter::class,'courses_id');
+        return $this->hasMany(CourseChapter::class);
     }
 
     public function videos()
     {
-        return $this->hasMany(Video::class,'courses_id');
+        return $this->hasMany(Video::class);
     }
 
     public function exams()
     {
-        return $this->hasMany(ChapterExam::class,'courses_id');
+        return $this->hasMany(ChapterExam::class);
     }
+
+    public function enrole()
+    {
+        return $this->belongsTo(Enrole::class);
+    }
+
+    public function pdfs()
+    {
+        return $this->hasMany(Pdf::class);
+    }
+
 }

@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 
 class VideoController extends Controller
 {
-    public function showVideo($slug)
+    public function showVideo($id)
     {
-        $video = Video::where('slug',$slug)->first();
+        $video = Video::with(['comments','comments.replayComments'])->findOrFail($id);
         $viewKey = 'video_'.$video->id;
         if (!Session::has($viewKey)){
             $video->increment('view_count');
